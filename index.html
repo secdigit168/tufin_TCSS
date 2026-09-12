@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TCSS 1 - 銷售訓練手冊：How To Sell Tufin｜安數科技 SECDigit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink-900:#1a1614;
+    --ink-800:#231F20;
+    --ink-700:#332b28;
+    --orange-600:#ED7600;
+    --orange-500:#F58B24;
+    --teal-600:#2F8B8C;
+    --bg:#f7f6f4;
+    --card:#ffffff;
+    --text:#231F20;
+    --text-soft:#5a544f;
+    --border:#e6e1da;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  html{font-size:15px;}
+  body{
+    margin:0;padding:0;
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",-apple-system,BlinkMacSystemFont,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    font-size:15px;
+    line-height:1.75;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+  }
+  p, li, span, div, figcaption, a, button, h1, h2, h3 { font-size: inherit; }
+
+  /* ---------- Header ---------- */
+  header.site-header{
+    flex:0 0 auto;
+    background:linear-gradient(120deg,var(--ink-900),var(--ink-800) 65%,#3d332e);
+    color:#fff;
+    padding:10px 20px;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    box-shadow:0 2px 10px rgba(20,15,10,.3);
+    border-bottom:3px solid var(--orange-600);
+    z-index:60;
+  }
+  header.site-header .brand-left,header.site-header .brand-right{display:flex;align-items:center;gap:12px;flex:0 0 auto;}
+  header.site-header img.logo{height:38px;width:auto;display:block;}
+  header.site-header .brand-right img.logo{height:30px;}
+  header.site-header svg.tufin-logo{height:32px;width:auto;display:block;}
+  header.site-header .title-block{flex:1 1 auto;text-align:center;min-width:0;padding:0 10px;}
+  header.site-header .title-block h1{font-size:17px;margin:0;font-weight:700;letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  header.site-header .title-block .sub{font-size:15px;color:#e7c9a3;margin-top:2px;}
+  .divider-line{width:1px;height:26px;background:rgba(255,255,255,.3);}
+
+  /* ---------- Tab bar (draggable/scrollable) ---------- */
+  nav.tab-bar-wrap{
+    flex:0 0 auto;
+    background:var(--ink-800);
+    display:flex;align-items:center;
+    padding:0 4px;
+    border-bottom:2px solid var(--orange-600);
+    z-index:55;
+  }
+  .tab-arrow{
+    flex:0 0 auto;background:var(--ink-700);color:#fff;border:none;
+    width:28px;height:32px;cursor:pointer;font-size:13px;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:6px;margin:4px;user-select:none;
+  }
+  .tab-arrow:hover{background:var(--orange-600);}
+  .tab-scroll{
+    flex:1 1 auto;overflow-x:auto;overflow-y:hidden;white-space:nowrap;scroll-behavior:smooth;
+    -ms-overflow-style:none;scrollbar-width:none;cursor:grab;padding:4px 2px;
+  }
+  .tab-scroll::-webkit-scrollbar{display:none;}
+  .tab-scroll.dragging{cursor:grabbing;}
+  .tab-btn{
+    display:inline-block;background:transparent;color:#e7ded4;border:none;
+    padding:7px 14px;margin:0 2px;font-size:15px;font-weight:600;cursor:pointer;
+    border-radius:8px;white-space:nowrap;transition:background .15s,color .15s;
+  }
+  .tab-btn:hover{background:rgba(255,255,255,.08);color:#fff;}
+  .tab-btn.active{background:var(--orange-600);color:#fff;}
+  .page-counter{flex:0 0 auto;color:#e7ded4;font-size:15px;padding:0 12px;white-space:nowrap;}
+
+  /* ---------- Pager ---------- */
+  main.pager{flex:1 1 auto;position:relative;overflow:hidden;}
+  .page-view{position:absolute;inset:0;display:none;flex-direction:row;align-items:stretch;background:var(--bg);}
+  .page-view.active{display:flex;}
+
+  .slide-image-col{
+    width:50%;flex:0 0 50%;height:100%;background:#ece7e0;position:relative;
+    display:flex;align-items:center;justify-content:center;padding:16px;
+  }
+  .slide-image-col img.slide-img{max-width:100%;max-height:100%;object-fit:contain;display:block;box-shadow:0 2px 14px rgba(30,20,10,.18);border-radius:4px;}
+
+  .slide-subnav{
+    position:absolute;left:50%;bottom:14px;transform:translateX(-50%);
+    display:flex;align-items:center;gap:10px;
+    background:rgba(26,22,20,.78);border-radius:22px;padding:5px 8px;
+    z-index:5;
+  }
+  .slide-subnav.hidden{display:none;}
+  .slide-subnav .slide-nav-btn{
+    background:var(--orange-600);color:#fff;border:none;border-radius:50%;
+    width:30px;height:30px;font-size:15px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;transition:background .15s;
+    flex:0 0 auto;
+  }
+  .slide-subnav .slide-nav-btn:hover{background:var(--orange-500);}
+  .slide-subnav .slide-nav-btn:disabled{background:#8a8178;cursor:default;}
+  .slide-subnav .slide-counter{color:#fff;font-size:14px;min-width:44px;text-align:center;white-space:nowrap;}
+
+  .text-panel{width:50%;flex:0 0 50%;height:100%;min-width:0;box-sizing:border-box;display:flex;flex-direction:column;}
+  .read-controls{flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:16px 30px 0;}
+  .read-toggle-btn{
+    display:inline-flex;align-items:center;gap:6px;
+    background:var(--orange-600);color:#fff;border:none;border-radius:20px;
+    padding:6px 16px;font-size:15px;cursor:pointer;transition:background .15s;
+    white-space:nowrap;
+  }
+  .read-toggle-btn:hover{background:var(--orange-500);}
+  .read-toggle-btn.playing{background:var(--teal-600);}
+  .read-toggle-btn.paused{background:var(--orange-500);}
+  .read-toggle-btn .icon{font-size:15px;}
+  .rate-select{
+    border:1px solid var(--border);border-radius:14px;background:#fff;color:var(--text);
+    font-size:15px;padding:4px 10px;cursor:pointer;
+  }
+  .slide-text-col{flex:1 1 auto;padding:14px 30px 22px;min-width:0;box-sizing:border-box;overflow-y:auto;}
+  .slide-text-col h3{margin:0 0 12px;font-size:18px;color:var(--orange-600);}
+  .slide-text-col p{margin:9px 0;font-size:15px;color:var(--text);text-align:justify;}
+  .slide-text-col ul{margin:6px 0 14px;padding-left:0;list-style:none;}
+  .slide-text-col ul li{position:relative;margin:7px 0;padding-left:20px;font-size:15px;color:var(--text);text-align:justify;}
+  .slide-text-col ul li::before{content:"";position:absolute;left:2px;top:0.55em;width:7px;height:7px;border-radius:2px;background:var(--orange-600);transform:rotate(45deg);}
+  .kc-box{background:#eef6f6;border-left:4px solid var(--teal-600);border-radius:6px;padding:10px 14px;margin:14px 0 6px;}
+  .kc-label{font-weight:700;color:var(--teal-600);margin-bottom:4px;font-size:15px;letter-spacing:.3px;}
+  .kc-box p{margin:4px 0;font-size:15px;color:var(--text-soft);}
+
+  .page-tag{
+    position:absolute;left:10px;bottom:10px;
+    font-size:15px;color:#fff;background:rgba(26,22,20,.75);
+    padding:2px 10px;border-radius:6px;line-height:1.4;
+  }
+
+  footer.site-footer{
+    flex:0 0 auto;background:var(--ink-900);color:#cbb9a4;font-size:15px;
+    padding:5px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;
+  }
+
+  /* ---------- Pager nav buttons ---------- */
+  .pager-controls{position:fixed;right:22px;bottom:46px;z-index:100;display:flex;gap:10px;align-items:center;}
+  .pager-btn{
+    background:var(--orange-600);color:#fff;border:none;width:50px;height:50px;border-radius:50%;
+    font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 3px 10px rgba(30,20,10,.4);transition:background .15s,transform .1s;user-select:none;
+  }
+  .pager-btn:hover{background:var(--orange-500);transform:translateY(-1px);}
+  .pager-btn.disabled{background:#c9beb1;cursor:default;box-shadow:none;}
+  .pager-btn.disabled:hover{background:#c9beb1;transform:none;}
+
+  @media (max-width:820px){
+    .page-view{flex-direction:column;overflow-y:auto;}
+    .slide-image-col{width:100%;flex:0 0 auto;height:36%;}
+    .text-panel{width:100%;flex:1 1 auto;height:auto;}
+    .slide-text-col{width:100%;flex:1 1 auto;height:auto;}
+    .read-controls{padding:10px 16px 0;}
+    header.site-header .title-block h1{font-size:15px;}
+    header.site-header img.logo{height:28px;}
+    header.site-header .brand-right img.logo{height:22px;}
+    .pager-btn{width:42px;height:42px;font-size:13px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="brand-left"><img class="logo" src="assets/secdigit_white_knockout.png" alt="安數科技 SECDigit"></div>
+  <div class="title-block">
+    <h1>TCSS 1 - Tufin 銷售中文訓練手冊</h1>
+    <div class="sub">Tufin Certified Sales Specialist 1 · How To Sell Tufin · 安數科技 SECDigit 中文版</div>
+  </div>
+  <div class="brand-right"><div class="divider-line"></div>
+    <svg class="logo tufin-logo" viewBox="0 0 210 90" role="img" aria-label="Tufin">
+      <text x="4" y="66" font-family="'Baloo 2','Poppins','Quicksand','Arial Rounded MT Bold',sans-serif" font-weight="800" font-size="64" fill="#ffffff" letter-spacing="-1">tufin</text>
+    </svg>
+  </div>
+</header>
+
+<nav class="tab-bar-wrap">
+  <button class="tab-arrow" id="arrowLeft" aria-label="向左">&#10094;</button>
+  <div class="tab-scroll" id="tabScroll" tabindex="0">
+  <button class="tab-btn active" data-module="0">01 理想客戶輪廓</button><button class="tab-btn" data-module="1">02 銷售訊息傳遞</button><button class="tab-btn" data-module="2">03 網路資安挑戰</button><button class="tab-btn" data-module="3">04 SecureCloud 商機評估</button><button class="tab-btn" data-module="4">05 銷售互動策略</button><button class="tab-btn" data-module="5">06 Tufin 解決方案</button><button class="tab-btn" data-module="6">07 Tufin 公司簡介</button><button class="tab-btn" data-module="7">08 應用案例</button><button class="tab-btn" data-module="8">09 價值驅動因素</button>
+</div>
+  <button class="tab-arrow" id="arrowRight" aria-label="向右">&#10095;</button>
+  <div class="page-counter"><span id="curIdx">1</span> / <span id="totalIdx">36</span></div>
+</nav>
+
+<main class="pager" id="pager">
+<div class="page-view" data-index="0" data-module="0" data-textkey="p1" data-chapter-id="ch0">
+  <div class="slide-image-col" data-images="[&quot;page-01-1.png&quot;, &quot;page-01-2.png&quot;]">
+    <img class="slide-img" data-src="slides/page-01-1.png" alt="第 1 頁">
+    <div class="page-tag">第 1 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 2</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="1" data-module="0" data-textkey="p2" data-chapter-id="ch0">
+  <div class="slide-image-col" data-images="[&quot;page-02-1.png&quot;, &quot;page-02-2.png&quot;, &quot;page-02-3.png&quot;, &quot;page-02-4.png&quot;, &quot;page-02-5.png&quot;, &quot;page-02-6.png&quot;, &quot;page-02-7.png&quot;]">
+    <img class="slide-img" data-src="slides/page-02-1.png" alt="第 2 頁">
+    <div class="page-tag">第 2 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 7</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="2" data-module="1" data-textkey="p3" data-chapter-id="ch1">
+  <div class="slide-image-col" data-images="[&quot;page-03-1.png&quot;, &quot;page-03-2.png&quot;, &quot;page-03-3.png&quot;]">
+    <img class="slide-img" data-src="slides/page-03-1.png" alt="第 3 頁">
+    <div class="page-tag">第 3 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 3</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="3" data-module="1" data-textkey="p4" data-chapter-id="ch1">
+  <div class="slide-image-col" data-images="[&quot;page-04-1.png&quot;, &quot;page-04-2.png&quot;, &quot;page-04-3.png&quot;]">
+    <img class="slide-img" data-src="slides/page-04-1.png" alt="第 4 頁">
+    <div class="page-tag">第 4 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 3</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="4" data-module="1" data-textkey="p5" data-chapter-id="ch1">
+  <div class="slide-image-col" data-images="[&quot;page-05-1.png&quot;, &quot;page-05-2.png&quot;, &quot;page-05-3.png&quot;, &quot;page-05-4.png&quot;, &quot;page-05-5.png&quot;, &quot;page-05-6.png&quot;, &quot;page-05-7.png&quot;, &quot;page-05-8.png&quot;]">
+    <img class="slide-img" data-src="slides/page-05-1.png" alt="第 5 頁">
+    <div class="page-tag">第 5 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 8</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="5" data-module="2" data-textkey="p6" data-chapter-id="ch2">
+  <div class="slide-image-col" data-images="[&quot;page-06-1.png&quot;, &quot;page-06-2.png&quot;, &quot;page-06-3.png&quot;]">
+    <img class="slide-img" data-src="slides/page-06-1.png" alt="第 6 頁">
+    <div class="page-tag">第 6 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 3</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="6" data-module="2" data-textkey="p7" data-chapter-id="ch2">
+  <div class="slide-image-col" data-images="[&quot;page-07-1.png&quot;, &quot;page-07-2.png&quot;, &quot;page-07-3.png&quot;]">
+    <img class="slide-img" data-src="slides/page-07-1.png" alt="第 7 頁">
+    <div class="page-tag">第 7 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 3</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="7" data-module="2" data-textkey="p8" data-chapter-id="ch2">
+  <div class="slide-image-col" data-images="[&quot;page-08-1.png&quot;, &quot;page-08-2.png&quot;]">
+    <img class="slide-img" data-src="slides/page-08-1.png" alt="第 8 頁">
+    <div class="page-tag">第 8 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 2</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="8" data-module="3" data-textkey="p9" data-chapter-id="ch3">
+  <div class="slide-image-col" data-images="[&quot;page-09-1.png&quot;, &quot;page-09-2.png&quot;, &quot;page-09-3.png&quot;]">
+    <img class="slide-img" data-src="slides/page-09-1.png" alt="第 9 頁">
+    <div class="page-tag">第 9 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 3</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="9" data-module="3" data-textkey="p10" data-chapter-id="ch3">
+  <div class="slide-image-col" data-images="[&quot;page-10-1.png&quot;, &quot;page-10-2.png&quot;]">
+    <img class="slide-img" data-src="slides/page-10-1.png" alt="第 10 頁">
+    <div class="page-tag">第 10 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 2</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="10" data-module="3" data-textkey="p11" data-chapter-id="ch3">
+  <div class="slide-image-col" data-images="[&quot;page-11-1.png&quot;, &quot;page-11-2.png&quot;, &quot;page-11-3.png&quot;]">
+    <img class="slide-img" data-src="slides/page-11-1.png" alt="第 11 頁">
+    <div class="page-tag">第 11 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 3</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="11" data-module="4" data-textkey="p12" data-chapter-id="ch4">
+  <div class="slide-image-col" data-images="[&quot;page-12-1.png&quot;, &quot;page-12-2.png&quot;, &quot;page-12-3.png&quot;]">
+    <img class="slide-img" data-src="slides/page-12-1.png" alt="第 12 頁">
+    <div class="page-tag">第 12 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 3</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="12" data-module="4" data-textkey="p13" data-chapter-id="ch4">
+  <div class="slide-image-col" data-images="[&quot;page-13-1.png&quot;, &quot;page-13-2.png&quot;, &quot;page-13-3.png&quot;]">
+    <img class="slide-img" data-src="slides/page-13-1.png" alt="第 13 頁">
+    <div class="page-tag">第 13 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 3</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="13" data-module="4" data-textkey="p14" data-chapter-id="ch4">
+  <div class="slide-image-col" data-images="[&quot;page-14-1.png&quot;, &quot;page-14-2.png&quot;, &quot;page-14-3.png&quot;]">
+    <img class="slide-img" data-src="slides/page-14-1.png" alt="第 14 頁">
+    <div class="page-tag">第 14 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 3</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="14" data-module="4" data-textkey="p15" data-chapter-id="ch4">
+  <div class="slide-image-col" data-images="[&quot;page-15-1.png&quot;, &quot;page-15-2.png&quot;, &quot;page-15-3.png&quot;]">
+    <img class="slide-img" data-src="slides/page-15-1.png" alt="第 15 頁">
+    <div class="page-tag">第 15 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 3</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="15" data-module="4" data-textkey="p16" data-chapter-id="ch4">
+  <div class="slide-image-col" data-images="[&quot;page-16-1.png&quot;, &quot;page-16-2.png&quot;]">
+    <img class="slide-img" data-src="slides/page-16-1.png" alt="第 16 頁">
+    <div class="page-tag">第 16 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 2</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="16" data-module="4" data-textkey="p17" data-chapter-id="ch4">
+  <div class="slide-image-col" data-images="[&quot;page-17-1.png&quot;, &quot;page-17-2.png&quot;]">
+    <img class="slide-img" data-src="slides/page-17-1.png" alt="第 17 頁">
+    <div class="page-tag">第 17 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 2</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="17" data-module="5" data-textkey="p18" data-chapter-id="ch5">
+  <div class="slide-image-col" data-images="[&quot;page-18-1.png&quot;, &quot;page-18-2.png&quot;, &quot;page-18-3.png&quot;]">
+    <img class="slide-img" data-src="slides/page-18-1.png" alt="第 18 頁">
+    <div class="page-tag">第 18 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 3</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="18" data-module="5" data-textkey="p19" data-chapter-id="ch5">
+  <div class="slide-image-col" data-images="[&quot;page-19-1.png&quot;, &quot;page-19-2.png&quot;, &quot;page-19-3.png&quot;]">
+    <img class="slide-img" data-src="slides/page-19-1.png" alt="第 19 頁">
+    <div class="page-tag">第 19 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 3</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="19" data-module="5" data-textkey="p20" data-chapter-id="ch5">
+  <div class="slide-image-col" data-images="[&quot;page-20-1.png&quot;, &quot;page-20-2.png&quot;, &quot;page-20-3.png&quot;]">
+    <img class="slide-img" data-src="slides/page-20-1.png" alt="第 20 頁">
+    <div class="page-tag">第 20 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 3</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="20" data-module="5" data-textkey="p21" data-chapter-id="ch5">
+  <div class="slide-image-col" data-images="[&quot;page-21-1.png&quot;, &quot;page-21-2.png&quot;, &quot;page-21-3.png&quot;]">
+    <img class="slide-img" data-src="slides/page-21-1.png" alt="第 21 頁">
+    <div class="page-tag">第 21 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 3</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="21" data-module="5" data-textkey="p22" data-chapter-id="ch5">
+  <div class="slide-image-col" data-images="[&quot;page-22-1.png&quot;, &quot;page-22-2.png&quot;, &quot;page-22-3.png&quot;]">
+    <img class="slide-img" data-src="slides/page-22-1.png" alt="第 22 頁">
+    <div class="page-tag">第 22 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 3</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="22" data-module="5" data-textkey="p23" data-chapter-id="ch5">
+  <div class="slide-image-col" data-images="[&quot;page-23-1.png&quot;, &quot;page-23-2.png&quot;, &quot;page-23-3.png&quot;]">
+    <img class="slide-img" data-src="slides/page-23-1.png" alt="第 23 頁">
+    <div class="page-tag">第 23 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 3</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="23" data-module="5" data-textkey="p24" data-chapter-id="ch5">
+  <div class="slide-image-col" data-images="[&quot;page-24-1.png&quot;, &quot;page-24-2.png&quot;, &quot;page-24-3.png&quot;, &quot;page-24-4.png&quot;, &quot;page-24-5.png&quot;, &quot;page-24-6.png&quot;, &quot;page-24-7.png&quot;, &quot;page-24-8.png&quot;, &quot;page-24-9.png&quot;]">
+    <img class="slide-img" data-src="slides/page-24-1.png" alt="第 24 頁">
+    <div class="page-tag">第 24 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 9</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="24" data-module="5" data-textkey="p25" data-chapter-id="ch5">
+  <div class="slide-image-col" data-images="[&quot;page-25-1.png&quot;, &quot;page-25-2.png&quot;, &quot;page-25-3.png&quot;, &quot;page-25-4.png&quot;]">
+    <img class="slide-img" data-src="slides/page-25-1.png" alt="第 25 頁">
+    <div class="page-tag">第 25 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 4</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="25" data-module="6" data-textkey="p26" data-chapter-id="ch6">
+  <div class="slide-image-col" data-images="[&quot;page-26-1.png&quot;, &quot;page-26-2.png&quot;, &quot;page-26-3.png&quot;, &quot;page-26-4.png&quot;]">
+    <img class="slide-img" data-src="slides/page-26-1.png" alt="第 26 頁">
+    <div class="page-tag">第 26 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 4</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="26" data-module="7" data-textkey="p27" data-chapter-id="ch7">
+  <div class="slide-image-col" data-images="[&quot;page-27-1.png&quot;, &quot;page-27-2.png&quot;, &quot;page-27-3.png&quot;, &quot;page-27-4.png&quot;]">
+    <img class="slide-img" data-src="slides/page-27-1.png" alt="第 27 頁">
+    <div class="page-tag">第 27 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 4</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="27" data-module="7" data-textkey="p28" data-chapter-id="ch7">
+  <div class="slide-image-col" data-images="[&quot;page-28-1.png&quot;, &quot;page-28-2.png&quot;, &quot;page-28-3.png&quot;, &quot;page-28-4.png&quot;]">
+    <img class="slide-img" data-src="slides/page-28-1.png" alt="第 28 頁">
+    <div class="page-tag">第 28 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 4</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="28" data-module="7" data-textkey="p29" data-chapter-id="ch7">
+  <div class="slide-image-col" data-images="[&quot;page-29-1.png&quot;, &quot;page-29-2.png&quot;, &quot;page-29-3.png&quot;, &quot;page-29-4.png&quot;]">
+    <img class="slide-img" data-src="slides/page-29-1.png" alt="第 29 頁">
+    <div class="page-tag">第 29 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 4</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="29" data-module="8" data-textkey="p30" data-chapter-id="ch8">
+  <div class="slide-image-col" data-images="[&quot;page-30-1.png&quot;, &quot;page-30-2.png&quot;, &quot;page-30-3.png&quot;, &quot;page-30-4.png&quot;]">
+    <img class="slide-img" data-src="slides/page-30-1.png" alt="第 30 頁">
+    <div class="page-tag">第 30 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 4</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="30" data-module="8" data-textkey="p31" data-chapter-id="ch8">
+  <div class="slide-image-col" data-images="[&quot;page-31-1.png&quot;, &quot;page-31-2.png&quot;, &quot;page-31-3.png&quot;]">
+    <img class="slide-img" data-src="slides/page-31-1.png" alt="第 31 頁">
+    <div class="page-tag">第 31 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 3</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="31" data-module="8" data-textkey="p32" data-chapter-id="ch8">
+  <div class="slide-image-col" data-images="[&quot;page-32-1.png&quot;, &quot;page-32-2.png&quot;, &quot;page-32-3.png&quot;]">
+    <img class="slide-img" data-src="slides/page-32-1.png" alt="第 32 頁">
+    <div class="page-tag">第 32 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 3</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="32" data-module="8" data-textkey="p33" data-chapter-id="ch8">
+  <div class="slide-image-col" data-images="[&quot;page-33-1.png&quot;, &quot;page-33-2.png&quot;, &quot;page-33-3.png&quot;]">
+    <img class="slide-img" data-src="slides/page-33-1.png" alt="第 33 頁">
+    <div class="page-tag">第 33 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 3</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="33" data-module="8" data-textkey="p34" data-chapter-id="ch8">
+  <div class="slide-image-col" data-images="[&quot;page-34-1.png&quot;, &quot;page-34-2.png&quot;, &quot;page-34-3.png&quot;]">
+    <img class="slide-img" data-src="slides/page-34-1.png" alt="第 34 頁">
+    <div class="page-tag">第 34 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 3</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="34" data-module="8" data-textkey="p35" data-chapter-id="ch8">
+  <div class="slide-image-col" data-images="[&quot;page-35-1.png&quot;, &quot;page-35-2.png&quot;, &quot;page-35-3.png&quot;]">
+    <img class="slide-img" data-src="slides/page-35-1.png" alt="第 35 頁">
+    <div class="page-tag">第 35 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 3</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+<div class="page-view" data-index="35" data-module="8" data-textkey="p36" data-chapter-id="ch8">
+  <div class="slide-image-col" data-images="[&quot;page-36-1.png&quot;, &quot;page-36-2.png&quot;, &quot;page-36-3.png&quot;, &quot;page-36-4.png&quot;]">
+    <img class="slide-img" data-src="slides/page-36-1.png" alt="第 36 頁">
+    <div class="page-tag">第 36 頁</div>
+    <div class="slide-subnav hidden">
+      <button class="slide-nav-btn slide-prev" type="button" aria-label="上一張">&#8249;</button>
+      <span class="slide-counter">1 / 4</span>
+      <button class="slide-nav-btn slide-next" type="button" aria-label="下一張">&#8250;</button>
+    </div>
+  </div>
+  <div class="text-panel">
+    <div class="read-controls">
+      <button class="read-toggle-btn" type="button"></button>
+      <select class="rate-select" title="朗讀速度"></select>
+    </div>
+    <div class="slide-text-col"></div>
+  </div>
+</div>
+</main>
+
+<div class="pager-controls">
+  <button class="pager-btn" id="prevBtn" aria-label="上一頁" title="上一頁">&#8592;</button>
+  <button class="pager-btn" id="nextBtn" aria-label="下一頁" title="下一頁">&#8594;</button>
+</div>
+
+<footer class="site-footer">
+  <span>安數科技股份有限公司 SECDigit｜Tufin Authorized Technical Services Partner (ATP)</span>
+  <span>本手冊內容參考 Tufin Orchestration Suite R25-2 官方知識庫（Knowledge Center）編製，僅供內部教育訓練與客戶導入參考使用</span>
+</footer>
+
+<script>
+(function(){
+  var pages = Array.prototype.slice.call(document.querySelectorAll('.page-view'));
+  var total = pages.length;
+  var current = 0;
+  var curIdxEl = document.getElementById('curIdx');
+  var totalIdxEl = document.getElementById('totalIdx');
+  var prevBtn = document.getElementById('prevBtn');
+  var nextBtn = document.getElementById('nextBtn');
+  var tabButtons = Array.prototype.slice.call(document.querySelectorAll('.tab-btn'));
+  totalIdxEl.textContent = total;
+
+  var moduleFirstIndex = {"0": 0, "1": 2, "2": 5, "3": 8, "4": 11, "5": 17, "6": 25, "7": 26, "8": 29};
+
+  var TEXT_MAP = {"p1": "<h3>理想客戶輪廓總覽</h3><p>透過安全政策協同管理，同時提升資安與業務敏捷性。</p><p>以下是最有可能採用 Tufin 解決方案的客戶類型，通常是大型企業：</p><p>掌握商機的訊號</p><ul><li>法規／合規要求（例如金融業的 PCI、醫療業的 HIPAA）</li></ul><ul><li>近期曾遭受攻擊</li></ul><ul><li>名列全球 2000 大企業——擁有大量據點</li></ul><ul><li>近期發生併購</li></ul><ul><li>近期管理階層異動</li></ul><p>採購特徵</p><ul><li>科技早期採用者</li></ul><ul><li>稽核未通過（PCI、SOX、NERC）</li></ul><ul><li>專案導向</li></ul><ul><li>資安預算占整體 IT 支出比例高，且持續成長</li></ul><p>技術特徵</p><ul><li>網路架構複雜</li></ul><ul><li>異質環境（多廠牌）</li></ul><ul><li>雲端環境</li></ul><ul><li>變更請求頻率高</li></ul><ul><li>對現有解決方案不滿意</li></ul>", "p2": "<h3>目標採購決策群體</h3><p>本套銷售訊息素材專為優先鎖定的客戶對象設計。目的是為您與客戶及潛在客戶的個別對話，提供一套可依循的範本；您可以將本章內容，結合自身對客戶實際情況的經驗與了解，發展出具說服力的對話。</p><p>網路維運（Network Operations）</p><p>職稱：網路維運副總、網路架構師</p><p>工作環境：</p><ul><li>須處理來自整個企業與資安團隊的各種請求</li></ul><ul><li>人力吃緊，缺乏具備足夠技能的人才</li></ul><ul><li>深受多廠牌網路環境的複雜度所苦</li></ul><ul><li>想推動創新，卻沒有足夠時間或資源</li></ul><p>Tufin 解決方案能帶來的可能性與價值</p><p>目標：</p><ul><li>達成 99.99% 的網路與應用程式正常運行時間</li></ul><ul><li>推動關鍵業務專案（例如遷移資料中心〔地端或雲端〕，或部署關鍵任務應用程式）</li></ul><ul><li>運用科技改善維運並降低成本</li></ul><ul><li>通過稽核</li></ul><p>挑戰：</p><ul><li>減少導致網路停機、拉長平均修復時間（MTTR）的人為錯誤與設定錯誤</li></ul><ul><li>簡化網路複雜度</li></ul><ul><li>應對資源限制與資深工程師短缺的問題</li></ul><ul><li>採用新技術，確保網路敏捷且高效</li></ul><p>可提出的問題：</p><ul><li>從提出請求到完成網路裝置變更，通常需要多久時間？</li></ul><ul><li>貴公司每週／每月大約會收到多少筆網路裝置變更請求？</li></ul><ul><li>貴公司如何管理網路的複雜度？</li></ul><ul><li>貴公司的雲端策略為何？</li></ul><ul><li>貴公司是否對公有雲與／或私有雲的工作負載、流量與連線具備可視性？</li></ul><p>資安維運（Security Operations）</p><p>職稱：CSO、CISO、資安維運總監</p><p>工作環境：</p><ul><li>時時擔憂下一次重大資安事件的發生</li></ul><ul><li>深受資料過量與人力不足所苦</li></ul><ul><li>須處理業務單位造成的影子 IT 與資安漏洞</li></ul><ul><li>須在應變速度與資安要求之間取得平衡</li></ul><p>Tufin 解決方案能帶來的可能性與價值</p><p>目標：</p><ul><li>依良好的公司治理實務與合規要求，制定企業資安政策</li></ul><ul><li>確保整個網路（地端與雲端）皆遵循企業資安政策</li></ul><ul><li>確保資安事件能被妥善偵測並快速處理</li></ul><ul><li>透過稽核與最佳實務落實，達成理想的資安狀態</li></ul><p>挑戰：</p><ul><li>嚴重缺乏具備技能的人才（難以留住合適人才）</li></ul><ul><li>須應對持續變化的環境與攻擊型態</li></ul><ul><li>須面對新工具導入的挑戰——工具過多、時間與精力不足，導致分析癱瘓</li></ul><ul><li>須達成足夠的可視性與報告能力，以滿足稽核要求並衡量風險</li></ul><ul><li>須從被動式資安轉為主動式資安</li></ul><ul><li>須維護所有變更、擁有者與正當理由的文件與稽核軌跡</li></ul><p>可提出的問題：</p><ul><li>貴公司如何衡量對資安政策的遵循程度？</li></ul><ul><li>貴公司如何在業務優先順序與資安政策之間取得平衡？</li></ul><ul><li>貴公司如何衡量目前的風險與合規狀態？</li></ul><ul><li>貴公司是否採用 DevOps？若是，在 CI/CD 模式下，如何確保持續受到保護？</li></ul><p>雲端資安維運（Cloud Security Operations）</p><p>職稱：CTO／應用程式擁有者、IT 資安／雲端資安</p><p>工作環境：</p><ul><li>負責雲端轉型與雲端資安專案</li></ul><ul><li>深受混合雲／多雲網路缺乏可視性所苦</li></ul><ul><li>須在不影響敏捷性的前提下，兼顧業務需求與資安需求</li></ul><ul><li>須處理團隊不遵循資安政策的問題</li></ul><ul><li>擔心工作負載從地端遷移至雲端時，難以維持合規與資安政策</li></ul><p>Tufin 解決方案能帶來的可能性與價值</p><p>目標：</p><ul><li>設計並建置雲端資安解決方案，在雲端架構的速度與彈性需求之間取得平衡</li></ul><ul><li>針對平台與應用程式監控，制定符合企業策略及整體產業趨勢方向的雲端資安策略</li></ul><ul><li>營運持續交付框架與工具，加速開發團隊的 CI/CD 流程</li></ul><ul><li>為基礎架構投資做好長期規劃，節省成本</li></ul><p>挑戰：</p><ul><li>缺乏自動化、須仰賴人工介入，拖慢滿足業務需求的速度</li></ul><ul><li>缺乏對整個企業網路的可視性，形成監控死角</li></ul><ul><li>開發人員須快速發布，同時仍須遵循資安政策</li></ul><ul><li>雲原生技術瞬息萬變，且須避免被單一廠牌綁定</li></ul><p>可提出的問題：</p><ul><li>貴公司採用單一雲端廠牌，還是多雲策略？</li></ul><ul><li>貴公司是否已部署微服務？您是否負責管理／監控此環境？</li></ul><ul><li>貴公司有多少比例的應用程式是直接搬遷（Lift and Shift）？</li></ul><ul><li>貴公司有多少比例的應用程式是雲原生架構？</li></ul><ul><li>您是否負責管理安全群組（Security Groups）？</li></ul>", "p3": "<h3>為什麼選擇 Tufin：專業服務</h3><p>全球專業服務團隊，協助客戶快速上線，並將 Tufin 採購案的價值最大化。</p><p>提供多樣化的服務目錄，滿足您的各種需求：</p><ul><li>運用預先建置的實作套件，涵蓋 ITSM、SIEM、IPAM、NCM、SOAR、弱點管理等領域的整合</li></ul>", "p4": "<h3>為什麼選擇 Tufin：價值主張</h3><p>透過安全政策協同管理，同時提升資安與業務敏捷性。</p><p>我們的價值主張，不僅止於多數其他資安廠商所強調的風險規避與合規效益；透過網路變更流程自動化，我們能為客戶帶來顯著的業務敏捷性投資報酬（ROI）。</p><ul><li>以分鐘而非天數的速度，落實資安變更</li></ul><ul><li>掌握並掌控地端、雲原生與混合雲環境的可視性</li></ul><ul><li>確保持續符合資安標準</li></ul><ul><li>將網路與資安團隊整合進 DevOps 流程，加速安全應用程式的交付</li></ul>", "p5": "<h3>為什麼選擇 Tufin：核心優勢</h3><p>一致的政策落實</p><p>跨地端、雲原生與混合雲環境，一致地落實安全政策：無論規模大小、身處哪種環境，皆能精準且一致地將安全政策套用於任何應用程式／工作負載。</p><p>端對端可視性</p><ul><li>進階政策搜尋能力</li><li>變更影響分析</li><li>應用程式連線監控與相依關係對應</li><li>即時監控與報告</li><li>精準、可互動的網路拓撲模型</li><li>針對所有變更及其資安影響的完整稽核軌跡</li><li>完整掌握資安／合規現況與理想狀態之間的落差</li></ul><p>開放且可客製化</p><ul><li>彈性且可自訂的變更工作流程</li><li>豐富的平台 API 與 SDK，支援擴充與客製化</li><li>輕鬆將未受支援的網路裝置加入網路拓撲模型</li><li>彈性的自動化程度</li><li>活躍的開發者社群</li></ul><p>防火牆清理自動化</p><ul><li>具備影響分析的規則與伺服器除役自動生命週期管理</li><li>政策最佳化與清理的自動化流程</li><li>自動化規則重新認證流程</li><li>支援最廣泛平台的自動化網路物件群組修改流程</li></ul><p>精準的變更設計與自動化</p><ul><li>支援分析、設計與實作的進階拓撲能力</li><li>支援最廣泛企業平台的變更設計與實作</li><li>變更必要性分析</li><li>最佳化的變更設計工具，在確保政策易讀的同時將攻擊面降到最低</li></ul><p>企業級可靠性</p><ul><li>全天候、接力式的真正 24/7 支援</li><li>具自動容錯移轉能力的高可用性，支援災難復原</li><li>可擴充的分散式架構</li><li>支援多租戶架構，實現部門、業務單位或客戶之間的資料隔離</li><li>客戶成功團隊</li></ul><p>多租戶管理</p><ul><li>依用量計費的消費模式</li><li>原生多租戶解決方案：確保客戶之間的區隔／各客戶獨立的分析與報告</li><li>直覺易用的 MSSP 儀表板，完整掌握用量與成本，便於管理</li><li>尊榮級支援與市場推廣（GTM）協助</li><li>專為 MSSP 設計的免費線上訓練課程</li><li>可與客戶共享的白牌報告</li><li>彈性授權額度，可隨時新增或移除裝置，無需另行採購</li></ul>", "p6": "<h3>企業面臨的挑戰</h3><p>企業正快速導入雲端與物聯網（IoT），導致網路日趨複雜、破碎化，攻擊面也隨之大幅擴大。</p><p>因此，企業持續面臨以下困境：</p><ul><li>不斷增加防火牆等資安措施的數量</li></ul><ul><li>缺乏有效、全面且自動化的政策管理能力</li></ul>", "p7": "<h3>人工處理方式的侷限</h3><p>人工方式無法因應當今的挑戰：</p><ul><li>網路攻擊的頻率與複雜度不斷提高</li></ul><ul><li>管理當今混合式 IT——雲端與軟體定義網路——的複雜度日益增加</li></ul><ul><li>應用程式開發與部署的步調加快</li></ul><ul><li>法規與合規要求持續演變</li></ul>", "p8": "<h3>全新的資安管理思維</h3><p>資安、雲端與網路維運需要全新的思維方式</p><p>導入一套集中式的資安管理層，用以分析、定義並落實企業專屬的資安政策。</p>", "p9": "<h3>依應用情境評估 SecureCloud 商機</h3><p>直接搬遷（Lift and Shift）</p><p>客戶是否只是把既有工作負載搬到雲端，做為資料中心的延伸？</p><p>若「是」，這屬於 SecureTrack／SecureChange 的商機。</p><p>若「否」，可繼續詢問以下問題：</p><p>客戶是否想將既有應用程式轉型為微服務與容器架構？</p><p>若「是」，這屬於 SecureCloud 的商機。</p><p>雲原生／最佳化（Cloud Optimized/Native）</p><p>客戶是否關心哪些應用程式／服務擁有存取權限，以及這些存取權限是如何被取得的？</p><p>客戶是否想從工單系統轉型為資安自動化？</p><p>若「是」，這屬於 SecureCloud 的商機。</p><p>客戶是否採用 Kubernetes 相關技術，例如 OpenShift？</p><p>混合雲（Hybrid Cloud）</p><p>客戶是否擔心須以人工方式在混合環境中落實資安？</p><p>若「是」，這代表可以全力進攻，爭取完整解決方案的採購。</p><div class=\"kc-box\"><div class=\"kc-label\">Tufin R25-2 官方知識庫補充說明</div><p>R25-2 版本新增了針對 Zscaler ZIA（SASE／SSE 架構）的自動化變更設計與主動風險分析，可協助業務團隊在客戶導入 SASE 架構時，將 SecureCloud 的價值主張延伸至分散式的網路存取邊界，而不僅限於傳統雲端工作負載情境。</p></div>", "p10": "<h3>依關鍵決策者評估 SecureCloud 商機</h3><p>（本頁彙整關鍵決策者角色，內容與「理想客戶輪廓」單元中的網路維運、資安維運與雲端資安維運人物誌相互呼應，請一併參考。）</p>", "p11": "<h3>探詢痛點的關鍵問題</h3><p>資安團隊是否掌握這些雲端服務與應用程式的可視性？</p><p>資安團隊是否掌握應用程式開發團隊在其雲端服務／應用程式中，如何設定資安存取權限的可視性？</p><p>客戶如何同時管理地端與雲端的資安政策？</p><p>誰負責／誰參與雲端環境的資安工作？</p><p>（可進一步詢問相關團隊名稱，例如 DevOps、CloudOps、雲端資安、DevSecOps 等，並取得相關聯絡人資訊）</p><p>是否已有專案／預算／時程／高階主管贊助者等要素到位？</p>", "p12": "<h3>銷售互動策略總覽</h3><p>客戶的採購決策是分階段進行的。</p><p>以下模組將檢視銷售互動策略的各個階段與層級，包括：</p><ul><li>初步興趣（Initial Interest）</li></ul><ul><li>專案定義（Project Definition）</li></ul><ul><li>解決方案決策（Solution Decision）</li></ul>", "p13": "<h3>第一階段：初步興趣</h3><p>我們該接觸哪些對象？CISO、網路維運副總。</p><p>他們會因應市場如何改變？</p><p>在「為何要改變」（Why Change）階段，高階主管會逐漸意識到業務轉型相關議題（挑戰、競爭、風險、成本等）。</p><p>而基層員工則會著手調查、探索市場上的最新動態，以掌握最新資訊。</p>", "p14": "<h3>第二階段：專案定義</h3><p>我們該在什麼時機點切入？</p><p>CISO：處於「意識」（第一階段）或「教育」（第二階段）層級時。</p><p>網路維運副總：處於「興趣」（第一階段）與「教育」（第二階段）層級時。</p><p>實體規劃週期：</p><ul><li>形成策略</li></ul><ul><li>透過白板會議進行教育溝通</li></ul><p>目標：在白板會議後爭取到高層支持，以便進一步執行工作坊與評估作業。</p>", "p15": "<h3>第一、二階段：我們在賣什麼？</h3><p>我們在賣什麼？</p><p>對 CISO 而言：主動式資安政策管理、自動化法規遵循（內部與外部）、統一安全政策、可視性，以及持續合規。</p><p>對網路維運副總而言：透過自動化實現業務敏捷性、最佳化網路資源、跟上業務發展速度，並提升對複雜多廠牌環境的可視性。</p><p>我們希望在「意識」或「教育」階段切入——讓對方理解業務敏捷性所帶來的壓力與威脅，體認資安的必要性，進而推進其專案階段。</p><p>掌握對方處於「為何要改變？」，或「為何是現在？」的早期階段時切入。此時正是談論主動式資安管理、自動化合規的最佳時機。</p><p>若等到專案階段才切入，能賣出的內容就會變少。</p>", "p16": "<h3>第三階段：解決方案決策</h3><p>解決方案決策階段</p><p>為什麼選擇 Tufin？</p><p>若我們是在此階段才切入，就必須仰賴概念驗證（POC）、進行大量產品展示，並在缺乏產品差異化優勢的情況下，於技術與價格上正面競爭。</p>", "p17": "<h3>後續步驟：接下來呢？</h3><p>CISO：籌組工作坊，與售前工程師（SE）一同釐清現況與未來期望；邀請所有需要參與、能協助解決成功疑慮的相關人員參加。目標是找出他們目前的專案，以及與我們產品的契合點。</p><p>網路維運副總：舉辦工作坊，釐清目前與未來的期望，以及兩者之間的落差；邀請網路維運總監（重視 SLA）、網路架構師與資安部門參與。目標是找出他們目前的專案，以及與我們產品的契合點。</p><p>其他戰術：搭配針對性的產品展示、最佳實務範例、成功案例與客戶研究成果。</p>", "p18": "<h3>安全政策成熟度模型</h3><p>解決方案：網路安全政策管理成熟度模型</p><p>若我們檢視「資安」與「業務敏捷性」這兩項限制條件：在現今環境中，若一味追求高度資安，行動就會變慢；若一味追求高度敏捷，就難以確保資安無虞。我們協助客戶在兩者之間找到平衡，同時兼顧資安與敏捷性。</p><p>起點：步驟一——可視性</p><p>在我們「爬、走、跑」式的安全政策成熟度模型中，客戶通常會從可視性開始著手：</p><p>①將 SecureTrack 連接至所有網路裝置與雲端平台　②針對所有區域，定義統一安全政策　③針對整個環境執行掃描</p><p>步驟二——清理</p><p>此階段客戶通常會展開清理專案，若採人工方式可能耗時數月，若透過 Tufin 自動化則可縮短至數天完成。</p><p>客戶達成乾淨的政策狀態後，往往開心不到一週，就又有 50 項新變更發生，使其再度偏離自訂的政策。客戶因而體認到，唯有將安全政策內嵌至網路變更流程中，才能跳脫這種不斷追趕不合規變更的無限循環。到了這個階段，許多客戶會採購 SecureChange，並將其與 ServiceNow 或 BMC Remedy 等工單系統整合。</p><p>步驟三——分析與設計</p><p>不合規的變更會自動退回給請求者，不會浪費工程師的時間。若變更符合已設定的護欄規範，SecureChange 便會運用拓撲模型執行連線路徑分析，找出該連線路徑上所有的防火牆、路由器、交換器與雲端平台。</p><p>接著，我們會針對路徑上每台裝置與平台，設計出最精簡、最恰當的變更內容；自動化的最後一哩，就是將該變更自動供應配置到所有相關的防火牆、路由器、交換器與雲端平台。</p><p>步驟四——應用程式驅動自動化與零接觸自動化</p><p>到了這個階段，客戶已達成零接觸自動化——意即能以分鐘而非天數的速度落實網路變更，同時大幅提升資安與準確度。</p><p>減少應用團隊與網路資安團隊之間的摩擦：SecureApp 是一套應用程式建模框架，做為應用程式開發人員與網路團隊之間的溝通平台，讓應用程式相關的網路變更請求與管理更加輕鬆。</p><div class=\"kc-box\"><div class=\"kc-label\">Tufin R25-2 官方知識庫補充說明</div><p>R25-2 為 TufinAI 助理新增多項強化功能：使用者能以自然語言直接在 SecureChange 開立存取請求工單、以口語化查詢搜尋裝置，並透過 Microsoft Copilot 詢問拓撲相關問題，讓「爬、走、跑」成熟度模型中的自動化階段更容易被客戶技術團隊採用與上手。</p></div>", "p19": "<h3>Tufin Orchestration Suite 總覽</h3><p>此圖說明 Tufin Orchestration Suite 如何融入您的業務：</p><p>SecureTrack：Tufin SecureTrack 是唯一一套能透過管理日益複雜且破碎的企業 IT 環境，同時提供資安、合規與連線能力的防火牆管理解決方案；透過 SecureTrack，您能掌握不受廠牌限制的可視性與控管能力，涵蓋防火牆、次世代防火牆、路由器、交換器、SDN 與混合雲，保護您的混合網路。</p><p>SecureChange：Tufin SecureChange 提供以政策為基礎的自動化與協同管理，讓企業能以分鐘而非天數的速度，精準落實網路變更。</p><p>SecureApp：Tufin SecureApp 提供整個網路應用程式連線的可視性與控管能力，透過加快應用程式部署速度，並促進應用團隊與網路資安團隊之間的溝通，提升業務敏捷性。</p><p>SecureCloud：Tufin SecureCloud 是 Tufin Orchestration Suite 的重要新成員，是市場上唯一能統一管理地端、雲原生與混合雲環境安全政策的平台。</p>", "p20": "<h3>SecureTrack 產品介紹</h3><p>防火牆與安全政策管理</p><p>唯一一套能透過管理日益複雜且破碎的企業 IT 環境，同時提供資安、合規與連線能力的防火牆管理解決方案。透過 SecureTrack，您能掌握不受廠牌限制的可視性與控管能力，涵蓋防火牆、次世代防火牆、路由器、交換器、SDN 與混合雲，保護您的混合網路。</p><p>SecureTrack 重點功能</p><ul><li>跨混合 IT 環境的可視性與控管</li><li>建立集中、統一的安全政策基準</li><li>即時合規與稽核準備</li><li>防火牆政策管理</li><li>建立並排除業務連線問題</li><li>即時偵測高風險存取與防火牆政策違規</li></ul>", "p21": "<h3>SecureChange 產品介紹</h3><p>網路安全變更自動化</p><p>Tufin SecureChange 提供以政策為基礎的自動化與協同管理，讓企業能以分鐘而非天數的速度，精準落實網路變更。</p><p>SecureChange 重點功能</p><ul><li>網路變更自動化</li><li>透過主動風險評估達成持續合規</li><li>可稽核的變更流程</li><li>彈性工作流程</li><li>防火牆清理自動化</li><li>廣泛的廠牌支援</li></ul>", "p22": "<h3>SecureApp 產品介紹</h3><p>應用程式連線管理</p><p>Tufin SecureApp 提供整個網路應用程式連線的可視性與控管能力，透過加快應用程式部署速度，並促進應用團隊與網路資安團隊之間的溝通，提升業務敏捷性。</p><p>SecureApp 重點功能</p><ul><li>自動化應用程式探索</li><li>應用程式連線管理</li><li>零接觸安全政策變更自動化</li><li>即時掌握所有應用程式與流量的可視性與控管</li><li>簡化維運流程並提升團隊協作</li></ul>", "p23": "<h3>SecureCloud 產品介紹</h3><p>混合雲安全政策管理</p><p>Tufin SecureCloud 是 Tufin Orchestration Suite 的重要新成員，是市場上唯一能統一管理地端、雲原生與混合雲環境安全政策的平台。</p><p>SecureCloud 重點功能</p><ul><li>統一管理地端、Kubernetes、公有雲與私有雲環境的資安</li><li>集中掌握資安態勢的可視性與控管，涵蓋 K8s 東西向與南北向流量</li><li>將資安內嵌至 DevOps CI/CD 管道（左移策略），化解開發與資安優先順序之間的衝突</li><li>自動化工作負載探索與政策產生</li><li>在不妥協的前提下，確保高度敏捷、自動化的環境安全無虞</li></ul><div class=\"kc-box\"><div class=\"kc-label\">Tufin R25-2 官方知識庫補充說明</div><p>依 R25-2 官方公告，SecureCloud／雲端合規能力新增了 AWS 與 GCP 環境的主動違規偵測、AWS 與 Microsoft Azure 帳戶的組織層級自動化納管，並支援對安裝於網卡（NIC）上的 AWS、GCP、Azure 網路安全群組執行 USP 合規檢查，可做為向具備多雲環境客戶說明「統一雲端安全政策管理」時的最新佐證。</p></div>", "p24": "<h3>Tufin Marketplace</h3><p>Tufin Marketplace 是橫跨整個資安生態圈的政策應用程式與擴充功能中樞。</p><p>將安全政策資料整合進既有的技術與流程，最大化投資報酬，讓您能運用統一的解決方案，應對最迫切的網路資安需求。這是一個數位平台，客戶可在此找到並部署能提升其安全政策管理實作整體價值的應用程式與擴充功能。</p><p>資安維運與事件回應：Rapid7、Qualys、Tenable、Cortex by Palo Alto Networks、Swimlane、IBM Resilient Security、DFLabs、Splunk Phantom</p><p>網路區隔：Efficient IP、Infoblox</p><p>報告擴充功能：政策分析與報告</p><p>變更自動化：ServiceNow、以 REST API 為基礎的解決方案</p><p>應用程式探索：Cisco Tetration</p><div class=\"kc-box\"><div class=\"kc-label\">Tufin R25-2 官方知識庫補充說明</div><p>Tufin Marketplace 所屬的整體平台架構，在 R25-2 中新增了對 Akamai Guardicore（地端與 SaaS 微分段）、Arista VeloCloud（SD-WAN）等裝置的支援，並將其原則與流量政策一併納入統一控制平面管理，可視為向客戶展示 Tufin 生態系持續擴大、涵蓋更多資安與網路廠牌的具體實例。</p></div>", "p25": "<h3>Tufin Mitigation App</h3><p>透過結合業務情境的網路洞察，強化弱點資料，藉此排定補救與緩解措施的優先順序。</p><p>與領先的弱點管理解決方案，提供隨插即用的整合：</p><p>以風險為基礎的補救優先排序：依關鍵資產的暴露程度，以及弱點的嚴重程度，排定弱點補救工作的優先順序。</p><p>運用網路洞察識別高風險資產：輕鬆評估既可被存取、又可被利用的弱點，對關鍵資產造成的整體風險。</p><p>在無法立即補救時，輕鬆套用緩解措施：透過封鎖對關鍵資產的存取，直到補救措施完全落實為止，自動化風險緩解。</p><p>追蹤緩解與補救成效：透過完整的儀表板，長期監控並衡量風險暴露程度，掌握整體弱點暴露狀況，以及緩解與補救工作的成效。</p><p>Gartner 曾指出，企業迫切需要評估資產的設定問題、暴露程度與弱點，藉此將補救與緩解工作聚焦於少數高風險項目上。——Gartner《弱點評估市場指南》，2019 年 11 月 20 日</p>", "p26": "<h3>2,100+ 全球客戶</h3><p>我們的客戶是誰？Tufin 的客戶多為擁有複雜網路、橫跨多元產業的大型企業。</p>", "p27": "<h3>應用案例：企業能節省多少成本？</h3><p>提升業務敏捷性、增進營運效率</p><p>某大型美國聯邦機構</p><ul><li>釋出 67% 的團隊產能</li></ul><ul><li>自動化 82% 的防火牆變更</li></ul><ul><li>將變更時間從 5 天以上縮短至 1 小時</li></ul><p>某大型德國汽車製造商</p><ul><li>生產力提升 50%</li></ul><ul><li>消除變更升級處理流程</li></ul><ul><li>變更落實時間縮短至 1 天以內</li></ul><p>某美國領先醫療照護業者</p><ul><li>釋出 62% 的團隊產能</li></ul><ul><li>將變更時間從 1-2 週縮短至 1 天</li></ul>", "p28": "<h3>應用案例：對業務的實際價值</h3><p>提升資安與準確度</p><p>某美國領先信用卡公司</p><ul><li>透過自動化防火牆變更，將人工設定錯誤與重工率從 25% 降至 3% 以下</li></ul><p>某大型美國金融科技公司</p><ul><li>自動化防火牆清理，一天內除役 1.8 萬條重複規則，強化網路資安</li></ul><p>某大型歐盟公用事業公司</p><ul><li>落實一致且完整記錄的作業流程</li></ul><ul><li>將稽核準備時間縮短至 1-2 天</li></ul><ul><li>消除重新開啟的請求</li></ul>", "p29": "<h3>應用案例：雲端資安加速數位轉型</h3><p>在不犧牲資安的前提下提升業務敏捷性</p><p>某大型美國金融服務公司</p><ul><li>掌握既有混合雲網路中暴露、高風險連接埠的可視性</li></ul><ul><li>自動產生政策，加速雲端網路擴充時程</li></ul><p>歐洲某消費性電子產品領導零售商</p><ul><li>在數分鐘內快速找出網路缺口</li></ul><ul><li>簡化合規政策的遵循流程</li></ul><p>香港某最大上市媒體公司</p><ul><li>掌握過度寬鬆政策的可視性，及早避免風險</li></ul><ul><li>透過自動化加快數位轉型速度</li></ul>", "p30": "<h3>價值驅動因素：人工作業流程（Why Change／Now／Tufin）</h3><p>Why Change？</p><p>洞察（給予）：我們發現，網路變更從工單開立到實際落實，往往因高度複雜、風險與人工作業，需要一到兩週的時間。</p><p>提問（探詢）：貴公司針對防火牆設定變更的 SLA 為何？若未能達成 SLA，對業務會造成什麼影響？</p><p>Why Now？</p><p>洞察（給予）：緩慢的政策變更會拉長應用程式交付時間，可能造成負面影響，甚至導致營收損失。由於流程緩慢，資安團隊往往被視為業務創新的阻礙，而非推動者。</p><p>提問（探詢）：如果能以分鐘而非天數完成變更，同時不犧牲資安或準確度，這對貴公司的業務或聲譽會帶來什麼樣的意義？</p><p>Why Tufin？</p><p>關鍵差異化優勢：</p><ul><li>精準的變更設計與自動化：以分鐘而非天數落實變更，同時持續符合政策要求</li></ul><ul><li>簡易的工作流程設定：貼合任何組織的業務流程，滿足業務敏捷性目標</li></ul><p>實績佐證：</p><p>「以前平均工單處理時間為 10-14 天，現在我們能做到當天完成變更。」——Mass Mutual</p><p>將變更時間從 6-7 週縮短至數小時或數天。——Westpac</p><p>「我們現在能在 5 分鐘內完成簡單變更，30 分鐘到 1 小時內完成較複雜的變更。」——Fujitsu</p><p>後續步驟／行動呼籲：我們能否約個時間，於下週討論如何協助貴公司提升網路與資安流程的速度與敏捷性？</p>", "p31": "<h3>價值驅動因素：變更請求量（Why Change／Now／Tufin）</h3><p>Why Change？</p><p>洞察（給予）：我們觀察到，一般企業平均每月的變更量高達數百筆請求。</p><p>提問（探詢）：貴公司投入多少資源在網路變更流程上？處理這些請求需要花費多少人力工時或天數？</p><p>Why Now？</p><p>洞察（給予）：網路變更流程若缺乏自動化與敏捷性，將阻礙對業務需求的回應速度，拖慢應用程式部署，並助長影子 IT 的蔓延。</p><p>提問（探詢）：如果能將每月數百筆變更請求流程化、簡化，並大幅減少每筆所需的人力工時，您能否估算這對預算帶來的影響？</p><p>Why Tufin？</p><p>關鍵差異化優勢：精準的端對端變更設計與自動化——變更必要性分析。</p><p>實績佐證：</p><p>「〔Tufin〕發現有 75% 的工單其實根本不需要處理。」——Mass Mutual</p><p>「超過 20% 的規則被發現是不必要或重複的。」——Montext</p><p>後續步驟／行動呼籲：我們能否約個時間，於下週討論如何協助貴公司提升網路與資安流程的速度與敏捷性？</p>", "p32": "<h3>價值驅動因素：成本／固定預算（Why Change／Now／Tufin）</h3><p>Why Change？</p><p>洞察（給予）：對多數組織而言，現實情況是服務需求不斷增加，但預算卻維持不變。</p><p>提問（探詢）：在預算固定的情況下，貴公司如何控管日益升高的風險、縮小攻擊面，並避免設定錯誤？</p><p>Why Now？</p><p>洞察（給予）：我們發現，管理合規與法規要求的成本相當高昂，且會讓寶貴的專業人才耗費在瑣碎任務上；試想若有 5 到 10 人專責處理網路變更，這些人力原本其實可以投入能真正提升業務的策略性專案。</p><p>提問（探詢）：貴公司需要投入多少資源（人力／天數）來準備一次稽核？如果能減少甚至免除團隊在稽核流程上的投入，貴公司的創新能量能提升多少？</p><p>Why Tufin？</p><p>關鍵差異化優勢：</p><ul><li>準確且端對端的自動化與拓撲能力</li></ul><ul><li>統一安全政策與自動化，實現持續合規，並減少資安人力投入例外處理的時間</li></ul><ul><li>自動化清理功能，弭平網路裝置中的資安缺口</li></ul><ul><li>自動政策產生器可收緊過度寬鬆的規則</li></ul><p>實績佐證：</p><p>「生產力提升 20% 至 30%」——Slovak Telecom</p><p>「我估計〔Tufin〕讓我的團隊每天多出 30% 的時間。」——Virgin Media</p><p>後續步驟／行動呼籲：我們能否約個時間，於下週討論如何協助貴公司提升網路與資安流程的速度與敏捷性？</p>", "p33": "<h3>價值驅動因素：人為錯誤（Why Change／Now／Tufin）</h3><p>Why Change？</p><p>洞察（給予）：人工變更流程效率低落、耗時且容易出錯。</p><p>提問（探詢）：貴公司環境中，變更流程的人為錯誤導致網路停機的頻率有多高？貴公司如何確保網路變更不出錯？</p><p>Why Now？</p><p>洞察（給予）：人工設定錯誤是造成網路停機的主要原因之一，可能導致營收損失、法規罰款與商譽受損；即使是立意最良善的組織，也難免因網路設定錯誤而發生停機事件。</p><p>提問（探詢）：若防火牆規則變更的人為錯誤導致網路停機，平均需要多久時間才能找出並修正錯誤？貴公司的平均修復時間（MTTR）為何？</p><p>Why Tufin？</p><p>關鍵差異化優勢：</p><ul><li>開放且可客製化、企業級可靠性</li></ul><ul><li>多項隨插即用的自動化能力</li></ul><ul><li>儀表板可輕鬆識別風險</li></ul><ul><li>自動政策產生器可收緊過度寬鬆的規則</li></ul><ul><li>自動化應用程式連線監控，降低關鍵應用程式網路停機的機率與平均修復時間</li></ul><p>實績佐證：</p><p>「雖然每日變更請求量從 25 件增加到 130 件，重工率卻從 25% 降至 5%。」——Discover</p><p>「導入〔Tufin〕之前，超過 50% 的請求需要修正。」——HCSC</p><p>後續步驟／行動呼籲：我們能否約個時間，討論如何協助貴公司降低網路與資安流程的成本？</p>", "p34": "<h3>價值驅動因素：安全政策（Why Change／Now／Tufin）</h3><p>Why Change？</p><p>洞察（給予）：若網路安全政策未妥善維護、也不易查閱，將會影響組織維持持續合規的能力。</p><p>提問（探詢）：貴公司的存取政策是如何產生與維護的？如何確保安全政策的執行方式，符合內部與外部的規範要求？</p><p>Why Now？</p><p>洞察（給予）：來自董事會層級的壓力日益增加，要求持續證明內部與外部合規，以確保企業資安無虞。</p><p>提問（探詢）：貴公司在高階管理層級，是以什麼樣的細緻程度討論資安政策？董事會是否要求提供風險衡量與合規證明？</p><p>Why Tufin？</p><p>關鍵差異化優勢：</p><ul><li>Tufin 擁有業界最完整的區域對區域網路安全政策引擎，涵蓋次世代防火牆功能（使用者與應用程式層級）</li></ul><ul><li>自動化規則文件記錄與重新認證（定期業務正當性審查）</li></ul><p>實績佐證：</p><p>Thales Group 仰賴主動式風險分析，確保持續合規。</p><p>「過去每次稽核須耗費 20 到 24 小時，現在我們的團隊運用〔Tufin〕自動分析安全政策並產生報告。」——TransUnion</p><p>後續步驟／行動呼籲：我們能否約個時間，討論如何協助貴公司降低網路與資安流程的風險？</p>", "p35": "<h3>價值驅動因素：風險暴露增加（Why Change／Now／Tufin）</h3><p>Why Change？</p><p>洞察（給予）：我們發現，許多變更常因人工網路變更流程，而無意間引入了網路風險；每一條未被使用的規則，都可能成為駭客可利用的全新攻擊途徑。</p><p>提問（探詢）：貴公司如何驗證網路變更確實遵循存取政策、不會引入新風險？如何衡量防火牆設定與存取政策的資安程度？</p><p>Why Now？</p><p>洞察（給予）：在應用程式與伺服器除役時，防火牆規則往往仍可被存取，形成重大的外部威脅；未使用或已過期的網路規則，會在防火牆設定中形成缺口，可能使網路暴露於資安風險之中。</p><p>提問（探詢）：貴公司目前如何讓防火牆規則除役流程，與伺服器、應用程式的除役流程保持一致？如何驗證規則庫的嚴謹程度？</p><p>Why Tufin？</p><p>關鍵差異化優勢：</p><ul><li>Tufin 擁有業界最完整的區域對區域網路安全政策引擎，涵蓋使用者與應用程式層級</li></ul><ul><li>Tufin 提供隨插即用的自動化流程，清理過時與未使用的規則</li></ul><ul><li>Tufin 透過完整的網路拓撲地圖與路徑分析，提供完整可視性，協助疑難排解</li></ul><p>實績佐證：</p><p>「流程已獲得最佳化，潛在威脅也已降到最低。」——Six Group</p><p>「〔Tufin〕透過記錄未使用規則與物件的規則使用報告，協助我們移除超過 4 萬條規則。」——AIG</p><p>後續步驟／行動呼籲：我們能否約個時間，討論如何協助貴公司降低網路與資安流程的風險？</p>", "p36": "<h3>價值驅動因素：缺乏可視性（開場白／Why Change／Now／Tufin）</h3><p>開場白（Conversation Starter）——建立您的專業信譽</p><p>以我服務過其他財星 1000 大企業（與貴公司相似）的經驗來看，我發現……</p><p>以我在 IT 業界服務 XX 年的經驗來看，經驗顯示……</p><p>Why Change？</p><p>洞察（給予）：疏於管理的安全政策，會導致整個網路缺乏可視性，進而提升風險；缺乏對網路資安裝置的可視性，會掩蓋潛藏的資安風險，也會掩蓋潛在的效能瓶頸。</p><p>提問（探詢）：貴公司採用什麼樣的實作方法論，來落實並提升安全政策的可視性？</p><p>Why Now？</p><p>洞察（給予）：安全政策的可視性，是打造更安全基礎架構的關鍵；若忽略安全政策，可能對貴公司滿足業務需求的能力造成負面影響。</p><p>提問（探詢）：貴公司如何確保安全政策確實有效並被落實執行？如何確保每一條既有規則，都仍在使用中且具備正當的業務理由？</p><p>Why Tufin？</p><p>關鍵差異化優勢：</p><ul><li>針對未使用或遭遮蔽的規則與物件，提供自動化清理流程</li></ul><ul><li>自動化規則重新認證流程，定期審核每項存取權限的業務正當性</li></ul><ul><li>自動政策產生器，可將任何防火牆規則最佳化至風險最低的狀態</li></ul><p>實績佐證：</p><p>「部署〔Tufin〕短短數小時後，SRP 便取得實用的變更報告，讓他們得以充分掌握既有防火牆政策的狀態與內容。」——Salt River Project</p><p>「〔Tufin〕帶來前所未有的防火牆維運可視性與控管能力。」——Swisscom</p><p>後續步驟／行動呼籲：我們能否約個時間，討論如何協助貴公司降低網路與資安流程的風險？</p>"};
+
+  function safeHash(i){ try{ history.replaceState(null,'','#p'+i); }catch(e){} }
+
+  function activeModuleFor(i){
+    var page = pages[i];
+    return page ? page.getAttribute('data-module') : '0';
+  }
+
+  function syncTabs(i){
+    var mod = activeModuleFor(i);
+    tabButtons.forEach(function(b){
+      b.classList.toggle('active', b.dataset.module === mod);
+    });
+    var activeBtn = document.querySelector('.tab-btn.active');
+    if(activeBtn && activeBtn.scrollIntoView){
+      try{ activeBtn.scrollIntoView({block:'nearest', inline:'center', behavior:'smooth'}); }catch(e){}
+    }
+  }
+
+  function populateText(i){
+    var page = pages[i];
+    if(!page) return;
+    var key = page.getAttribute('data-textkey');
+    if(!key) return;
+    var tc = page.querySelector('.slide-text-col');
+    if(!tc) return;
+    if(tc.getAttribute('data-filled') === '1') return;
+    var html = TEXT_MAP[key];
+    if(html){
+      tc.innerHTML = html;
+      tc.setAttribute('data-filled', '1');
+    }
+  }
+
+  // ---------- Chapter read-aloud (Traditional Chinese text-to-speech) ----------
+  var synth = window.speechSynthesis || null;
+  var readState = 'stopped'; // 'stopped' | 'playing' | 'paused'
+  var pausedAtIndex = null;
+  var selectedVoice = null;   // SpeechSynthesisVoice
+  var selectedRate = 1.0;     // default reading speed
+  var voicesList = [];
+  var ttsKeepAliveTimer = null;
+  var ttsStartToken = 0;      // invalidates stale delayed speak() calls from a previous nav/stop
+
+  function pickDefaultVoice(){
+    if(!synth) return null;
+    var v = voicesList.find(function(x){ return /zh-TW/i.test(x.lang) && /Google/i.test(x.name); });
+    if(!v) v = voicesList.find(function(x){ return /zh-TW/i.test(x.lang) && (x.name.indexOf('國語') !== -1 || x.name.indexOf('台灣') !== -1); });
+    if(!v) v = voicesList.find(function(x){ return /zh-TW/i.test(x.lang); });
+    if(!v) v = voicesList.find(function(x){ return /zh-HK/i.test(x.lang); });
+    if(!v) v = voicesList.find(function(x){ return /zh/i.test(x.lang); });
+    return v || null;
+  }
+
+  function loadVoices(){
+    if(!synth) return;
+    voicesList = synth.getVoices() || [];
+    if(!selectedVoice) selectedVoice = pickDefaultVoice();
+  }
+  if(synth){
+    loadVoices();
+    if(synth.addEventListener) synth.addEventListener('voiceschanged', loadVoices);
+  }
+
+  function populateRateSelect(i){
+    var page = pages[i];
+    if(!page) return;
+    var sel = page.querySelector('.rate-select');
+    if(!sel) return;
+    if(sel.getAttribute('data-filled') === '1'){
+      sel.value = String(selectedRate);
+      return;
+    }
+    [['0.75','0.75x（較慢）'],['0.85','0.85x'],['1','1.0x（預設）'],['1.15','1.15x'],['1.3','1.3x（較快）']].forEach(function(pair){
+      var opt = document.createElement('option');
+      opt.value = pair[0];
+      opt.textContent = pair[1];
+      sel.appendChild(opt);
+    });
+    sel.value = String(selectedRate);
+    sel.setAttribute('data-filled', '1');
+    sel.addEventListener('change', function(){
+      selectedRate = parseFloat(sel.value) || 1.0;
+      document.querySelectorAll('.rate-select[data-filled="1"]').forEach(function(s2){
+        if(s2 !== sel) s2.value = sel.value;
+      });
+      if(readState === 'playing'){
+        speakIndex(current);
+      }
+    });
+  }
+
+  function getReadableText(i){
+    var page = pages[i];
+    if(!page) return '';
+    var col = page.querySelector('.slide-text-col');
+    if(!col) return '';
+    return (col.innerText || col.textContent || '').trim();
+  }
+
+  function updateReadButtons(){
+    document.querySelectorAll('.read-toggle-btn').forEach(function(b){
+      b.classList.remove('playing','paused');
+      var icon = '\u25B6', label = '朗讀本頁';
+      if(readState === 'playing'){ icon = '\u23F8'; label = '暫停朗讀'; b.classList.add('playing'); }
+      else if(readState === 'paused'){ icon = '\u25B6'; label = '繼續朗讀'; b.classList.add('paused'); }
+      b.innerHTML = '';
+      var iconSpan = document.createElement('span');
+      iconSpan.className = 'icon';
+      iconSpan.textContent = icon;
+      b.appendChild(iconSpan);
+      b.appendChild(document.createTextNode(' ' + label));
+    });
+  }
+
+  function clearKeepAlive(){
+    if(ttsKeepAliveTimer){ clearInterval(ttsKeepAliveTimer); ttsKeepAliveTimer = null; }
+  }
+  function startKeepAlive(){
+    clearKeepAlive();
+    ttsKeepAliveTimer = setInterval(function(){
+      if(synth && synth.speaking){
+        synth.pause();
+        synth.resume();
+      }
+    }, 9000);
+  }
+
+  function stopReading(){
+    ttsStartToken++;
+    clearKeepAlive();
+    readState = 'stopped';
+    pausedAtIndex = null;
+    if(synth){ try{ synth.cancel(); }catch(e){} }
+    updateReadButtons();
+  }
+
+  function speakIndex(i){
+    if(!synth || readState !== 'playing') return;
+    var page = pages[i];
+    if(!page){ stopReading(); return; }
+    var text = getReadableText(i);
+    ttsStartToken++;
+    var myToken = ttsStartToken;
+    clearKeepAlive();
+    try{ synth.cancel(); }catch(e){}
+    if(!text){ advanceReading(i); return; }
+    setTimeout(function(){
+      if(myToken !== ttsStartToken) return;
+      if(readState !== 'playing') return;
+      var utter = new SpeechSynthesisUtterance(text);
+      utter.lang = (selectedVoice && selectedVoice.lang) ? selectedVoice.lang : 'zh-TW';
+      if(selectedVoice) utter.voice = selectedVoice;
+      utter.rate = selectedRate;
+      utter.onstart = function(){ startKeepAlive(); };
+      utter.onend = function(){
+        clearKeepAlive();
+        if(readState === 'playing') advanceReading(i);
+      };
+      utter.onerror = function(){ clearKeepAlive(); };
+      synth.speak(utter);
+    }, 80);
+  }
+
+  function advanceReading(i){
+    var page = pages[i];
+    var nextPage = pages[i+1];
+    var curChapter = page ? page.getAttribute('data-chapter-id') : null;
+    if(nextPage && curChapter && nextPage.getAttribute('data-chapter-id') === curChapter){
+      show(i+1, true);
+      speakIndex(i+1);
+    } else {
+      stopReading();
+    }
+  }
+
+  function startReadingFrom(i){
+    if(!synth){ alert('您的瀏覽器不支援語音朗讀功能。'); return; }
+    readState = 'playing';
+    pausedAtIndex = null;
+    updateReadButtons();
+    speakIndex(i);
+  }
+
+  function pauseReading(){
+    if(readState !== 'playing') return;
+    readState = 'paused';
+    pausedAtIndex = current;
+    clearKeepAlive();
+    if(synth){ try{ synth.pause(); }catch(e){} }
+    updateReadButtons();
+  }
+
+  function resumeReading(){
+    if(readState !== 'paused') return;
+    readState = 'playing';
+    updateReadButtons();
+    if(pausedAtIndex === current && synth){
+      try{ synth.resume(); }catch(e){}
+      startKeepAlive();
+    } else {
+      speakIndex(current);
+    }
+  }
+
+  function toggleReadPlay(pageIdx){
+    if(readState === 'playing'){ pauseReading(); }
+    else if(readState === 'paused'){ resumeReading(); }
+    else { startReadingFrom(pageIdx); }
+  }
+
+  document.addEventListener('click', function(e){
+    var btn = e.target.closest ? e.target.closest('.read-toggle-btn') : null;
+    if(!btn) return;
+    var pageEl = btn.closest('.page-view');
+    var idx = pageEl ? parseInt(pageEl.getAttribute('data-index'), 10) : current;
+    toggleReadPlay(idx);
+  });
+
+  function getSlideImages(pageEl){
+    var col = pageEl.querySelector('.slide-image-col');
+    if(!col) return [];
+    try{
+      return JSON.parse(col.getAttribute('data-images') || '[]');
+    }catch(e){ return []; }
+  }
+
+  function showSlideImage(pageEl, idx){
+    var col = pageEl.querySelector('.slide-image-col');
+    if(!col) return;
+    var images = getSlideImages(pageEl);
+    if(!images.length) return;
+    if(idx < 0) idx = 0;
+    if(idx > images.length-1) idx = images.length-1;
+    col.setAttribute('data-imgidx', idx);
+    var img = col.querySelector('img.slide-img');
+    if(img){
+      img.src = 'slides/' + images[idx];
+      img.removeAttribute('data-src');
+    }
+    var subnav = col.querySelector('.slide-subnav');
+    if(subnav){
+      if(images.length > 1){
+        subnav.classList.remove('hidden');
+        var counter = subnav.querySelector('.slide-counter');
+        if(counter) counter.textContent = (idx+1) + ' / ' + images.length;
+        var prevBtn2 = subnav.querySelector('.slide-prev');
+        var nextBtn2 = subnav.querySelector('.slide-next');
+        if(prevBtn2) prevBtn2.disabled = (idx === 0);
+        if(nextBtn2) nextBtn2.disabled = (idx === images.length-1);
+      } else {
+        subnav.classList.add('hidden');
+      }
+    }
+  }
+
+  document.addEventListener('click', function(e){
+    var prevBtn2 = e.target.closest ? e.target.closest('.slide-prev') : null;
+    var nextBtn2 = e.target.closest ? e.target.closest('.slide-next') : null;
+    var btn = prevBtn2 || nextBtn2;
+    if(!btn || btn.disabled) return;
+    var pageEl = btn.closest('.page-view');
+    if(!pageEl) return;
+    var col = pageEl.querySelector('.slide-image-col');
+    var curIdx = parseInt(col.getAttribute('data-imgidx') || '0', 10);
+    showSlideImage(pageEl, curIdx + (nextBtn2 ? 1 : -1));
+  });
+
+  function loadImagesFor(i){
+    if(i < 0 || i > total-1) return;
+    var page = pages[i];
+    if(!page) return;
+    var col = page.querySelector('.slide-image-col');
+    if(col && col.getAttribute('data-initialized') !== '1'){
+      col.setAttribute('data-initialized', '1');
+      showSlideImage(page, 0);
+      return;
+    }
+    var imgs = page.querySelectorAll('img.slide-img[data-src]');
+    imgs.forEach(function(img){
+      img.src = img.getAttribute('data-src');
+      img.removeAttribute('data-src');
+    });
+  }
+
+  function show(i, fromReading){
+    try{
+      if(i < 0) i = 0;
+      if(i > total-1) i = total-1;
+      var wasPlaying = (!fromReading && readState === 'playing');
+      var wasPaused = (!fromReading && readState === 'paused');
+      if(pages[current]) pages[current].classList.remove('active');
+      current = i;
+      populateText(current);
+      populateRateSelect(current);
+      loadImagesFor(current);
+      loadImagesFor(current+1);
+      loadImagesFor(current-1);
+      if(pages[current]){
+        var curCol = pages[current].querySelector('.slide-image-col');
+        if(curCol && curCol.getAttribute('data-initialized') === '1'){
+          showSlideImage(pages[current], 0);
+        }
+      }
+      pages[current].classList.add('active');
+      curIdxEl.textContent = current+1;
+      prevBtn.classList.toggle('disabled', current===0);
+      nextBtn.classList.toggle('disabled', current===total-1);
+      safeHash(current);
+      syncTabs(current);
+      if(wasPlaying){
+        speakIndex(current);
+      } else if(wasPaused){
+        clearKeepAlive();
+        if(synth){ try{ synth.cancel(); }catch(e){} }
+      }
+      updateReadButtons();
+      var tc = pages[current].querySelector('.slide-text-col');
+      if(tc) tc.scrollTop = 0;
+    }catch(err){
+      try{ console.error('show() failed at index', i, err); }catch(e2){}
+    }
+  }
+
+  prevBtn.addEventListener('click', function(){ show(current-1); });
+  nextBtn.addEventListener('click', function(){ show(current+1); });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'ArrowRight'){ show(current+1); }
+    else if(e.key === 'ArrowLeft'){ show(current-1); }
+  });
+
+  tabButtons.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var mod = btn.dataset.module;
+      if(moduleFirstIndex.hasOwnProperty(mod)){
+        show(moduleFirstIndex[mod]);
+      }
+    });
+  });
+
+  try{
+    var h = location.hash ? location.hash.substring(1) : '';
+    var m = h.match(/^p(\d+)$/);
+    if(m){ show(parseInt(m[1],10)); } else { show(0); }
+  }catch(e){ show(0); }
+
+  // ---------- Tab bar drag / scroll ----------
+  var tabScroll = document.getElementById('tabScroll');
+  document.getElementById('arrowLeft').addEventListener('click', function(){
+    tabScroll.scrollBy({left:-220, behavior:'smooth'});
+  });
+  document.getElementById('arrowRight').addEventListener('click', function(){
+    tabScroll.scrollBy({left:220, behavior:'smooth'});
+  });
+
+  var isDown = false, startX, scrollLeft;
+  tabScroll.addEventListener('mousedown', function(e){
+    isDown = true; tabScroll.classList.add('dragging');
+    startX = e.pageX - tabScroll.offsetLeft;
+    scrollLeft = tabScroll.scrollLeft;
+  });
+  ['mouseleave','mouseup'].forEach(function(evt){
+    tabScroll.addEventListener(evt, function(){ isDown=false; tabScroll.classList.remove('dragging'); });
+  });
+  tabScroll.addEventListener('mousemove', function(e){
+    if(!isDown) return;
+    e.preventDefault();
+    var x = e.pageX - tabScroll.offsetLeft;
+    var walk = (x - startX);
+    tabScroll.scrollLeft = scrollLeft - walk;
+  });
+  tabScroll.addEventListener('wheel', function(e){
+    if(Math.abs(e.deltaY) > Math.abs(e.deltaX)){
+      tabScroll.scrollLeft += e.deltaY;
+      e.preventDefault();
+    }
+  }, {passive:false});
+  var touchStartX = 0, touchScrollLeft = 0;
+  tabScroll.addEventListener('touchstart', function(e){
+    touchStartX = e.touches[0].pageX; touchScrollLeft = tabScroll.scrollLeft;
+  }, {passive:true});
+  tabScroll.addEventListener('touchmove', function(e){
+    var dx = e.touches[0].pageX - touchStartX;
+    tabScroll.scrollLeft = touchScrollLeft - dx;
+  }, {passive:true});
+})();
+</script>
+</body>
+</html>
